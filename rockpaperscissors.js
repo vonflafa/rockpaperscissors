@@ -8,48 +8,69 @@ function getComputerChoice () {
     let randomNumber = Math.floor(Math.random() * 3);
     switch (randomNumber) {
         case 0:
-            return "Rock";
+            return "rock";
             break;
         case 1:
-            return "Paper";
+            return "paper";
             break;
         case 2:
-            return "Scissors";
+            return "scissors";
             break;
     }
 }
   function playRound (playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
 
-    if (playerSelection === "paper") {
-      if (computerSelection === "Paper") {
+    /* 0 : TIE
+       1 : player LOSES (computer WINS)
+       2 : player WINS (computer LOSES)
+    */
+
+    if (playerSelection === computerSelection) {
         return 0;
-      } else if (computerSelection === "Scissors"){
+    } else if (
+        playerSelection === "paper" && computerSelection === "scissors" ||
+        playerSelection === "rock" && computerSelection === "paper" ||
+        playerSelection === "scissors" && computerSelection === "rock")
+    {
+            return 1;
+    } else if (
+        playerSelection === "scissors" && computerSelection === "paper" ||
+        playerSelection === "paper" && computerSelection === "rock" ||
+        playerSelection === "rock" && computerSelection === "scissors")
+        {
+            return 2;
+        }
+    }
+/* OLD WORKING VERSION of playRound
+
+   if (playerSelection === "paper") {
+      if (computerSelection === "paper") {
+        return 0;
+      } else if (computerSelection === "scissors"){
         return 1;
       }else {
         return 2;
       }
     } else if (playerSelection === "rock") {
-      if(computerSelection === "Rock") {
+      if(computerSelection === "rock") {
         return 0;
-      } else if (computerSelection === "Paper") {
+      } else if (computerSelection === "paper") {
         return 1;
       } else {
         return 2;
       }
     } else if (playerSelection === "scissors") {
-      if(computerSelection === "Scissors") {
+      if(computerSelection === "scissors") {
         return 0;
-      } else if (computerSelection === "Rock") {
+      } else if (computerSelection === "rock") {
         return 1;
       } else {
         return 2;
       }
-    } else {
-      return NaN;
     }
   }
-
+*/
   function game () {
     let result = 0;
     let playerCounter = 0;
@@ -77,7 +98,11 @@ function getComputerChoice () {
         console.log("Player wins " + playerCounter + " to " + computerCounter + "!");
     } else if (playerCounter < computerCounter) {
         console.log("Computer wins " + computerCounter + " to " + playerCounter + "!");
-    } else {
-        console.log("Something went wrong");
+    } else if (playerCounter === computerCounter) {
+        console.log("We have  TIE or something went wrong with the inputs. Let's play again.");
+        game();
     }
   }
+
+
+  game();
