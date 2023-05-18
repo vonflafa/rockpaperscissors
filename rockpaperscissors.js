@@ -5,22 +5,23 @@ output one of the previous values
 */
 
 function getComputerChoice () {
-    let choice = Math.random() * 3;
-    /*
-    0 - 1 : Rock
-    1 - 2 : Paper
-    2 - 3 : Scissors */
-    if (choice >=0 && choice <=1){
-      return "Rock";
-    } else if (choice > 1 && choice <=2) {
-      return "Paper";
+    let randomNumber = Math.floor(Math.random() * 3);
+    switch (randomNumber) {
+        case 0:
+            return "Rock";
+            break;
+        case 1:
+            return "Paper";
+            break;
+        case 2:
+            return "Scissors";
+            break;
     }
-    return "Scissors";
-  }
-
   function playRound (playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
-    /*const TIE = "It's a TIE!"
+    /*
+    Old code for a previous version of the exercise
+    const TIE = "It's a TIE!"
     const WIN =  "You WIN! " + playerSelection + " beats " + computerSelection + ".";
     const LOSE = "You LOSE! " + computerSelection + " beats " + playerSelection + ".";
     const ERROR = "Something went wrong!";*/
@@ -58,8 +59,13 @@ function getComputerChoice () {
     let result = 0;
     let playerCounter = 0;
     let computerCounter = 0;
-    for (let i = 0; i = 4; i++) {
-        result = playRound (let playerChoice = prompt("Paper, rock or scissors?"), let computerChoice = getComputerChoice());
+    let playerChoice = null;
+    let computerChoice = null;
+
+    for (let i = 0; i <= 4; i++) {
+      playerChoice = prompt("Paper, rock or scissors?");
+      computerChoice = getComputerChoice();
+        result = playRound (playerChoice, computerChoice);
         if (result === 0) {
             console.log ("This is a TIE!");
         } else if (result === 1) {
@@ -68,18 +74,15 @@ function getComputerChoice () {
         }else if (result === 2) {
             console.log("Computer WINS! " + computerChoice + " beats " + playerChoice);
             computerCounter++;
+        } else {
+          console.log("This round is not valid, something went wrong");
         }
     }
     if (playerCounter > computerCounter) {
-        console.log("Player wins with a total score of " + playerCounter + "!");
+        console.log("Player wins " + playerCounter + " to " + computerCounter + "!");
     } else if (playerCounter < computerCounter) {
-        console.log("Computer wins with a total score of " + computerCounter + "!");
+        console.log("Computer wins " + computerCounter + " to " + playerCounter + "!");
     } else {
         console.log("Something went wrong");
     }
   }
-
-  /* gioca un round
-  se vince player dagli un punto
-  se vince computer dagli un punto
-  
