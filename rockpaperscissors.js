@@ -17,3 +17,38 @@ function getComputerChoice () {
     }
     return "Scissors";
   }
+
+  function playRound (playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    const TIE = "It's a TIE!"
+    const WIN =  "You WIN! " + playerSelection + " beats " + computerSelection + ".";
+    const LOSE = "You LOSE! " + computerSelection + " beats " + playerSelection + ".";
+    const ERROR = "Something went wrong!";
+    if (playerSelection === "paper") {
+      if (computerSelection === "Paper") {
+        return TIE;
+      } else if (computerSelection === "Scissors"){
+        return LOSE;
+      }else {
+        return WIN;
+      }
+    } else if (playerSelection === "rock") {
+      if(computerSelection === "Rock") {
+        return TIE;
+      } else if (computerSelection === "Paper") {
+        return LOSE;
+      } else {
+        return WIN;
+      }
+    } else if (playerSelection === "scissors") {
+      if(computerSelection === "Scissors") {
+        return TIE;
+      } else if (computerSelection === "Rock") {
+        return LOSE;
+      } else {
+        return WIN;
+      }
+    } else {
+      return ERROR;
+    }
+  }
