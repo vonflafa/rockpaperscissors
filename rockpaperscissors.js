@@ -17,14 +17,9 @@ function getComputerChoice () {
             return "Scissors";
             break;
     }
+}
   function playRound (playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
-    /*
-    Old code for a previous version of the exercise
-    const TIE = "It's a TIE!"
-    const WIN =  "You WIN! " + playerSelection + " beats " + computerSelection + ".";
-    const LOSE = "You LOSE! " + computerSelection + " beats " + playerSelection + ".";
-    const ERROR = "Something went wrong!";*/
 
     if (playerSelection === "paper") {
       if (computerSelection === "Paper") {
