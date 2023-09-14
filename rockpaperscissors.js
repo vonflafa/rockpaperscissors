@@ -3,6 +3,11 @@ Generate a random number
 Transform the number to a value: rock, scissors, paper
 output one of the previous values
 */
+let computerCounter = 0;
+let playerCounter = 0;
+const resultBox = document.querySelector(".resultBox");
+const playerScore = document.querySelector(".playerScore");
+const computerScore = document.querySelector(".computerScore");
 
 function getComputerChoice () {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -19,7 +24,6 @@ function getComputerChoice () {
     }
 }
   function playRound (playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
 
     /* 0 : TIE
        1 : player LOSES (computer WINS)
@@ -71,38 +75,58 @@ function getComputerChoice () {
     }
   }
 */
-  function game () {
-    let result = 0;
-    let playerCounter = 0;
-    let computerCounter = 0;
-    let playerChoice = null;
-    let computerChoice = null;
+  function game (playerChoice) {
+    let computerChoice = getComputerChoice();
+    let result = playRound(playerChoice, computerChoice);
+    resultBox.textContent = "";
 
-    for (let i = 0; i <= 4; i++) {
-      playerChoice = prompt("Paper, rock or scissors?");
-      computerChoice = getComputerChoice();
-        result = playRound (playerChoice, computerChoice);
-        if (result === 0) {
-            console.log ("This is a TIE!");
-        } else if (result === 1) {
-            console.log("Player WINS! " + playerChoice + " beats " + computerChoice);
-            playerCounter++;
-        }else if (result === 2) {
-            console.log("Computer WINS! " + computerChoice + " beats " + playerChoice);
-            computerCounter++;
-        } else {
-          console.log("This round is not valid, something went wrong");
-        }
-    }
-    if (playerCounter > computerCounter) {
-        console.log("Player wins " + playerCounter + " to " + computerCounter + "!");
-    } else if (playerCounter < computerCounter) {
-        console.log("Computer wins " + computerCounter + " to " + playerCounter + "!");
-    } else if (playerCounter === computerCounter) {
-        console.log("We have a TIE or something went wrong with the inputs. Let's play again.");
-    }
+      if (result === 0) {
+        //console.log ("This is a TIE!");
+        //resultBox.textContent = "This is a TIE!";
+
+      } else if (result === 1) {
+        //console.log("Player WINS! " + playerChoice + " beats " + computerChoice);
+        //resultBox.textContent = `Player WINS! ${playerChoice} beats ${computerChoice}`;
+        playerCounter++;
+        playerScore.textContent = `${playerCounter}`;
+
+        //playerCounter++;
+        //playerScore.textContent = `${playerCounter}`;
+      } else if (result === 2) {
+        //console.log("Computer WINS! " + computerChoice + " beats " + playerChoice);
+        //resultBox.textContent =  `Computer WINS! ${computerChoice} beats ${playerChoice}`;
+        computerCounter++;
+        computerScore.textContent = `${computerCounter}`;
+        //computerCounter++;
+        //computerScore.textContent = `${computerCounter}`;
+      }
+
+      
+      globalResult();
+  }
+      
+    function globalResult () {
+
+      if (computerCounter === 5) {
+        resultBox.textContent = `Computer WINS the match! Final SCORE: ${computerCounter} - ${playerCounter}`;
+        computerCounter = 0;
+        playerCounter = 0;
+        computerScore.textContent = `${computerCounter}`;
+        playerScore.textContent = `${playerCounter}`;
+
+
+      }
+      else if (playerCounter === 5) {
+        resultBox.textContent = `Congratulation!!! You WIN!  Final SCORE: ${computerCounter} - ${playerCounter}`;
+        computerCounter = 0;
+        playerCounter = 0;
+        computerScore.textContent = `${computerCounter}`;
+        playerScore.textContent = `${playerCounter}`;
+
+
+      }
   }
 
   const btns = document.querySelector(".btns");
-  btns.addEventListener("click", (e) => playRound(e.target.dataset.name, getComputerChoice()));
+  btns.addEventListener("click", (e) => game(e.target.dataset.name));
   //game();
