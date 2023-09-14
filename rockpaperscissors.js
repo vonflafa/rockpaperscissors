@@ -27,19 +27,19 @@ function getComputerChoice () {
     */
 
     if (playerSelection === computerSelection) {
-        return 0;
+      return 0;
     } else if (
         playerSelection === "paper" && computerSelection === "scissors" ||
         playerSelection === "rock" && computerSelection === "paper" ||
         playerSelection === "scissors" && computerSelection === "rock")
     {
-            return 1;
+      return 1;
     } else if (
         playerSelection === "scissors" && computerSelection === "paper" ||
         playerSelection === "paper" && computerSelection === "rock" ||
         playerSelection === "rock" && computerSelection === "scissors")
         {
-            return 2;
+          return 2;
         }
     }
 /* OLD WORKING VERSION of playRound
@@ -99,10 +99,10 @@ function getComputerChoice () {
     } else if (playerCounter < computerCounter) {
         console.log("Computer wins " + computerCounter + " to " + playerCounter + "!");
     } else if (playerCounter === computerCounter) {
-        console.log("We have  TIE or something went wrong with the inputs. Let's play again.");
-        game();
+        console.log("We have a TIE or something went wrong with the inputs. Let's play again.");
     }
   }
 
-
-  game();
+  const btns = document.querySelector(".btns");
+  btns.addEventListener("click", (e) => playRound(e.target.dataset.name, getComputerChoice()));
+  //game();
